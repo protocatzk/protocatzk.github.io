@@ -1,0 +1,31 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
+import { localizedPath } from '../i18n/utils';
+
+const lang = 'de' as const;
+const title = '404 — Seite nicht gefunden';
+const description = 'Diese Seite existiert nicht. Zurück zum Portfolio von Proto.';
+---
+
+<Layout lang={lang} title={title} description={description} alternates={false} noindex>
+	<Header lang={lang} />
+
+	<main id="main" class="wrap error-page">
+		<div>
+			<p class="error-code">404</p>
+			<h1>Seite nicht gefunden</h1>
+			<p>
+				Diese Seite existiert nicht (mehr).<br />
+				<span lang="en">This page could not be found.</span>
+			</p>
+			<a class="btn primary" href={localizedPath(lang)}>
+				Zur Startseite
+				<span class="arrow" aria-hidden="true">→</span>
+			</a>
+		</div>
+	</main>
+
+	<Footer lang={lang} />
+</Layout>

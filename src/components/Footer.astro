@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<footer class="site-footer">
+	<div class="wrap footer-inner">
+		<p>© {new Date().getFullYear()} {site.name}</p>
+		<p>
+			{t('footer.built')}
+			<a href="https://astro.build" rel="noopener">Astro</a> · {t('footer.static')}
+		</p>
+		<a class="footer-top" href="#top">{t('footer.top')} ↑</a>
+	</div>
+</footer>

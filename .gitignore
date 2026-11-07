@@ -5,6 +5,8 @@ dist/
 
 # dependencies
 node_modules/
+.yarn/install-state.gz
+.yarn/build-state.yml
 
 # logs
 npm-debug.log*

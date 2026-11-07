@@ -1,0 +1,167 @@
+---
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import ProjectCard from './ProjectCard.astro';
+import { site, stack } from '../data/site';
+import type { Lang } from '../i18n/ui';
+import { assetPath, useTranslations } from '../i18n/utils';
+import { getProjects } from '../lib/projects';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projects = (await getProjects(lang)).map((project) => ({
+	...project,
+	description: project.description || t('projects.noDescription'),
+}));
+---
+
+<Layout lang={lang} title={t('meta.title')} description={t('meta.description')}>
+	<Header lang={lang} />
+
+	<main id="main">
+		<section class="hero wrap">
+			<div>
+				<p class="eyebrow">{t('hero.eyebrow')}</p>
+				<h1>{t('hero.title')}</h1>
+				<p class="lead">{t('hero.lead')}</p>
+
+				<div class="actions">
+					<a class="btn primary" href="#projects">
+						{t('hero.cta.projects')}
+						<span class="arrow" aria-hidden="true">↓</span>
+					</a>
+					<a class="btn" href={site.github}>
+						{t('hero.cta.github')}
+						<span class="arrow" aria-hidden="true">↗</span>
+					</a>
+				</div>
+
+				<ul class="pills">
+					<li>{t('hero.pill.location')}</li>
+					<li>{t('hero.pill.open')}</li>
+					<li>{t('hero.pill.stack')}</li>
+				</ul>
+			</div>
+
+			<aside class="profile-card" aria-label={t('profile.label')}>
+				<div class="profile-head">
+					<img
+						src={assetPath(site.avatar)}
+						alt=""
+						width="64"
+						height="64"
+						loading="eager"
+					/>
+					<div>
+						<div class="profile-name">{site.name}</div>
+						<span class="profile-role">{t('profile.role')}</span>
+					</div>
+				</div>
+
+				<dl class="specs">
+					<div>
+						<dt>{t('profile.handle')}</dt>
+						<dd>@{site.handle}</dd>
+					</div>
+					<div>
+						<dt>{t('profile.base')}</dt>
+						<dd>{t('hero.pill.location')}</dd>
+					</div>
+					<div>
+						<dt>{t('profile.focus')}</dt>
+						<dd>{t('profile.focus.value')}</dd>
+					</div>
+					<div>
+						<dt>{t('profile.status')}</dt>
+						<dd class="status-value">{t('profile.status.value')}</dd>
+					</div>
+				</dl>
+
+				<a class="profile-link" href={site.github}>
+					<span>github.com/{site.handle}</span>
+					<span aria-hidden="true">↗</span>
+				</a>
+			</aside>
+		</section>
+
+		<section class="section wrap" id="projects">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">{t('projects.eyebrow')}</p>
+					<h2>{t('projects.title')}</h2>
+				</div>
+				<p class="section-hint">{t('projects.hint')}</p>
+			</div>
+
+			{
+				projects.length > 0 ? (
+					<div class="project-grid">
+						{projects.map((project, index) => (
+							<ProjectCard project={project} index={index + 1} lang={lang} />
+						))}
+
+						<a class="project-card more" href={site.repos}>
+							<div class="card-top">
+								<span class="card-index">→</span>
+								<span class="card-lang">GitHub</span>
+							</div>
+							<h3 class="card-title">{t('projects.all')}</h3>
+							<p class="card-desc">{t('projects.moreHint')}</p>
+							<div class="card-foot">
+								<span class="open">{t('projects.github')} ↗</span>
+							</div>
+						</a>
+					</div>
+				) : (
+					<p class="section-hint">{t('projects.empty')}</p>
+				)
+			}
+		</section>
+
+		<section class="section wrap" id="about">
+			<div class="section-head">
+				<div>
+					<p class="eyebrow">{t('about.eyebrow')}</p>
+					<h2>{t('about.title')}</h2>
+				</div>
+			</div>
+
+			<div class="about-grid">
+				<div class="prose">
+					<p>{t('about.p1')}</p>
+					<p>{t('about.p2')}</p>
+				</div>
+
+				<div>
+					<p class="stack-label">{t('about.stack')}</p>
+					<ul class="chips">
+						{stack.map((item) => <li>{item}</li>)}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="section wrap" id="contact">
+			<div class="contact-box">
+				<div class="contact-copy">
+					<p class="eyebrow">{t('contact.eyebrow')}</p>
+					<h2>{t('contact.title')}</h2>
+					<p>{t('contact.text')}</p>
+				</div>
+
+				<a class="btn primary" href={site.github}>
+					{t('contact.cta')}
+					<span class="arrow" aria-hidden="true">↗</span>
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<Footer lang={lang} />
+</Layout>

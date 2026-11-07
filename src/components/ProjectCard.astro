@@ -1,0 +1,71 @@
+---
+import type { Lang } from '../i18n/ui';
+import { formatDate, useTranslations } from '../i18n/utils';
+import type { Project } from '../lib/projects';
+
+interface Props {
+	project: Project;
+	index: number;
+	lang: Lang;
+}
+
+const { project, index, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const languageColors: Record<string, string> = {
+	Python: '#3572a5',
+	TypeScript: '#3178c6',
+	JavaScript: '#f1e05a',
+	Astro: '#ff5a03',
+	Shell: '#89e051',
+	HTML: '#e34c26',
+	CSS: '#563d7c',
+	Dockerfile: '#384d54',
+};
+
+const dotColor = project.language
+	? (languageColors[project.language] ?? 'var(--muted)')
+	: 'var(--muted)';
+---
+
+<a
+	class:list={['project-card', { featured: project.featured }]}
+	href={project.url}
+>
+	<div class="card-top">
+		<span class="card-index">{String(index).padStart(2, '0')}</span>
+		{
+			project.language && (
+				<span class="card-lang">
+					<span class="lang-dot" style={`--dot: ${dotColor}`} aria-hidden="true" />
+					{project.language}
+				</span>
+			)
+		}
+	</div>
+
+	<h3 class="card-title">{project.title}</h3>
+	<p class="card-desc">{project.description}</p>
+
+	{
+		project.tags.length > 0 && (
+			<ul class="card-tags">
+				{project.tags.map((tag) => (
+					<li>{tag}</li>
+				))}
+			</ul>
+		)
+	}
+
+	<div class="card-foot">
+		<span class="meta">
+			<span>{t('projects.updated')} {formatDate(project.updatedAt, lang)}</span>
+			{
+				project.stars > 0 && (
+					<span>★ {project.stars} {t('projects.stars')}</span>
+				)
+			}
+		</span>
+		<span class="open">{t('projects.open')} ↗</span>
+	</div>
+</a>

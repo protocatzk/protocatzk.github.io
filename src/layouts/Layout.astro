@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import type { Lang } from '../i18n/ui';
+import { assetPath, localizedPath, useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+	title: string;
+	description: string;
+	alternates?: boolean;
+	noindex?: boolean;
+}
+
+const { lang, title, description, alternates = true, noindex = false } = Astro.props;
+const t = useTranslations(lang);
+
+const siteUrl = Astro.site ?? new URL('https://protocatzk.github.io');
+const canonical = new URL(Astro.url.pathname, siteUrl);
+const deUrl = new URL(localizedPath('de'), siteUrl);
+const enUrl = new URL(localizedPath('en'), siteUrl);
+const ogImage = new URL(assetPath(site.avatar), siteUrl);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: site.name,
+	alternateName: `@${site.handle}`,
+	url: site.github,
+	sameAs: [site.github],
+	jobTitle: t('profile.role'),
+	address: {
+		'@type': 'PostalAddress',
+		addressCountry: 'DE',
+	},
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content={site.name} />
+		<meta name="theme-color" content="#0d1117" />
+		<link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
+		{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical.href} />}
+
+		{
+			alternates && !noindex && (
+				<>
+					<link rel="alternate" hreflang="de" href={deUrl.href} />
+					<link rel="alternate" hreflang="en" href={enUrl.href} />
+					<link rel="alternate" hreflang="x-default" href={deUrl.href} />
+				</>
+			)
+		}
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical.href} />
+		<meta property="og:image" content={ogImage.href} />
+		<meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+		<meta name="twitter:card" content="summary" />
+
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+	</head>
+	<body id="top">
+		<a class="skip-link" href="#main">{t('skip')}</a>
+		<slot />
+	</body>
+</html>

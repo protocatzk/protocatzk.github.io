@@ -1,0 +1,54 @@
+---
+import { site } from '../data/site';
+import type { Lang } from '../i18n/ui';
+import { assetPath, localizedPath, useTranslations } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<header class="site-header">
+	<div class="wrap header-inner">
+		<a class="brand" href={localizedPath(lang)}>
+			<img
+				src={assetPath(site.avatar)}
+				alt=""
+				width="36"
+				height="36"
+				loading="eager"
+			/>
+			<span class="brand-copy">
+				<span class="brand-title">{site.name}</span>
+				<span class="brand-subtitle">{t('brand.subtitle')}</span>
+			</span>
+		</a>
+
+		<div class="header-right">
+			<nav class="nav" aria-label={t('nav.label')}>
+				<a href={localizedPath(lang, '#projects')}>{t('nav.projects')}</a>
+				<a href={localizedPath(lang, '#about')}>{t('nav.about')}</a>
+				<a href={localizedPath(lang, '#contact')}>{t('nav.contact')}</a>
+			</nav>
+
+			<div class="lang" role="group" aria-label={t('lang.label')}>
+				<a
+					href={localizedPath('de')}
+					hreflang="de"
+					lang="de"
+					aria-current={lang === 'de' ? 'true' : undefined}>DE</a
+				>
+				<span aria-hidden="true">/</span>
+				<a
+					href={localizedPath('en')}
+					hreflang="en"
+					lang="en"
+					aria-current={lang === 'en' ? 'true' : undefined}>EN</a
+				>
+			</div>
+		</div>
+	</div>
+</header>

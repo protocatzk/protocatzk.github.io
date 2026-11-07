@@ -1,43 +1,77 @@
-# Astro Starter Kit: Minimal
+# protocatzk.github.com
 
-```sh
-yarn create astro@latest -- --template minimal
+Statisches, zweisprachiges Portfolio für **Proto** — gebaut mit Astro, inspiriert vom dunklen, monochromen Interface von TokTracker.
+
+- **Deutsch** unter `/`, **Englisch** unter `/en/`
+- Projekte werden beim Build automatisch aus der öffentlichen GitHub-API geladen
+- Kein JavaScript, keine externen Fonts, kein Tracking
+- Budget: **unter 1 MB** — der Build schlägt fehl, wenn es größer wird
+
+## Entwicklung
+
+```bash
+yarn install
+yarn dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Der Dev-Server läuft standardmäßig auf `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Build
 
-Inside of your Astro project, you'll see the following folders and files:
+```bash
+yarn build
+```
+
+Der Build landet in `dist/` und wird anschließend automatisch auf Größe geprüft:
+
+```bash
+yarn size   # prüft einen vorhandenen dist/-Ordner
+```
+
+## Inhalte anpassen
+
+| Datei | Zweck |
+| :--- | :--- |
+| `src/i18n/ui.ts` | Alle Texte auf Deutsch und Englisch |
+| `src/data/site.ts` | Name, Handle, Links, Avatar, Stack |
+| `src/data/projects.ts` | Schöne Titel, Beschreibungen und Tags pro Repository |
+| `src/data/repos.fallback.json` | Lokaler Snapshot, falls die GitHub-API beim Build nicht erreichbar ist |
+| `src/styles/global.css` | Farben, Typografie und Layout |
+
+Neue öffentliche Repositories erscheinen automatisch. Sie können in `projectOverrides` ergänzt werden, müssen aber nicht. Forks sowie Profil- und Portfolio-Repositories werden ausgeblendet.
+
+### GitHub-API
+
+Beim Build wird `https://api.github.com/users/protocatzk/repos` abgefragt. Ohne Token gilt das Limit von 60 Anfragen pro Stunde. Für CI oder häufigere Builds kann ein Token gesetzt werden:
+
+```bash
+GITHUB_TOKEN=ghp_... yarn build
+```
+
+Schlägt die Anfrage fehl, wird automatisch `src/data/repos.fallback.json` verwendet.
+
+## Deployment
+
+Der Workflow `.github/workflows/deploy.yml` baut die Seite bei jedem Push auf `stream` und veröffentlicht sie über GitHub Pages.
+
+1. Im Repository unter **Settings → Pages** als Source **GitHub Actions** wählen.
+2. Push auf `stream`.
+
+`SITE_URL` und `BASE_PATH` werden vom Workflow aus `actions/configure-pages` gesetzt. Dadurch funktioniert die Seite sowohl als User-Page als auch als Project-Page unter einem Unterpfad. Bei einer eigenen Domain liefert `configure-pages` automatisch die passende URL.
+
+## Struktur
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/        Header, Footer, ProjectCard, PortfolioPage
+├── data/              Site-Konfiguration, Projekt-Copy, Repo-Snapshot
+├── i18n/              DE/EN-Texte und Routing-Helfer
+├── layouts/           HTML-Grundgerüst inkl. Meta/SEO
+├── lib/               GitHub-API und Projekt-Aufbereitung
+├── pages/             /, /en/ und 404
+└── styles/            globales CSS
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Design
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `yarn install`             | Installs dependencies                            |
-| `yarn dev`             | Starts local dev server at `localhost:4321`      |
-| `yarn build`           | Build your production site to `./dist/`          |
-| `yarn preview`         | Preview your build locally, before deploying     |
-| `yarn astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `yarn astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Das Layout übernimmt die visuelle Sprache von TokTracker: GitHub-Dark-Palette (`#0d1117`), eckige Rahmen, dünne Trennlinien, Monospace-Labels in Großbuchstaben und weiße Akzente. Schriften werden aus dem System geladen, Bilder liegen lokal im `public/`-Ordner.
