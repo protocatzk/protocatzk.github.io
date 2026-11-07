@@ -42,7 +42,7 @@ jobs:
         run: yarn build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SITE_URL: ${{ steps.pages.outputs.origin }}
+          SITE_URL: https://proto.heliac.dev
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
       - name: Upload artifact

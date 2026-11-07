@@ -11,7 +11,7 @@ type ProjectOverride = {
 /**
  * Copy for the projects shown on the page. Repositories are still loaded from
  * the GitHub API at build time — this file only adds nicer, bilingual copy.
- * New repositories appear automatically without an entry here.
+ * New repositories appear automatically in the "More projects" list.
  */
 export const projectOverrides: Record<string, ProjectOverride> = {
 	toktracker: {
@@ -19,26 +19,28 @@ export const projectOverrides: Record<string, ProjectOverride> = {
 		order: 1,
 		featured: true,
 		description: {
-			de: 'Dockerisierte TikTok-Live-Analytics-Plattform: Echtzeit-Geschenk-Tracking, Einnahmen in USD und EUR, Web-Dashboard und Telegram-Bot.',
-			en: 'Dockerized TikTok Live analytics platform: real-time gift tracking, USD/EUR revenue, web dashboard and Telegram bot.',
+			de: 'Trackt TikTok-Livestreams in Echtzeit: Geschenke, Zuschauer und Einnahmen landen in der Datenbank, das Dashboard zeigt die Auswertungen und der Telegram-Bot liefert Reports.',
+			en: 'Tracks TikTok livestreams in real time: gifts, viewers and revenue go into the database, the dashboard shows the numbers and a Telegram bot sends reports.',
 		},
 		tags: ['Python', 'FastAPI', 'Docker', 'MariaDB', 'Redis'],
 	},
 	restreamer: {
 		title: 'Restreamer',
 		order: 2,
+		featured: true,
 		description: {
-			de: 'Dockerisierter Restream-Service für TikTok-Livestreams — ein Stream rein, mehrere Ziele raus.',
-			en: 'Dockerized restream service for TikTok livestreams — one stream in, multiple destinations out.',
+			de: 'Nimmt einen TikTok-Stream an und verteilt ihn an mehrere Ziele. Läuft als Docker-Service mit Reconnect-Logik.',
+			en: 'Takes one TikTok stream and forwards it to multiple destinations. Runs as a Docker service with reconnect handling.',
 		},
 		tags: ['Python', 'Docker', 'FFmpeg'],
 	},
 	'streamrecorder-n8n-vod-uploader': {
 		title: 'Streamrecorder · n8n VOD Uploader',
 		order: 3,
+		featured: true,
 		description: {
-			de: 'Nimmt Streams auf und lädt VODs automatisch per n8n-Workflow hoch.',
-			en: 'Records streams and uploads VODs automatically via an n8n workflow.',
+			de: 'Nimmt Streams auf und übergibt die VODs per n8n-Workflow an den nächsten Schritt — ohne manuelles Hochladen.',
+			en: 'Records streams and hands the VODs to the next step via an n8n workflow — no manual uploading.',
 		},
 		tags: ['Python', 'n8n', 'Automation'],
 	},
@@ -46,8 +48,8 @@ export const projectOverrides: Record<string, ProjectOverride> = {
 		title: 'fractal.py',
 		order: 4,
 		description: {
-			de: 'Experimente mit Fraktalen und prozeduraler Grafik in Python.',
-			en: 'Experiments with fractals and procedural graphics in Python.',
+			de: 'Kleine Python-Spielwiese für Fraktale und prozedurale Grafik.',
+			en: 'A small Python playground for fractals and procedural graphics.',
 		},
 		tags: ['Python', 'Generative Art'],
 	},
@@ -55,17 +57,17 @@ export const projectOverrides: Record<string, ProjectOverride> = {
 		title: 'tidal',
 		order: 5,
 		description: {
-			de: 'TidalCycles-Experimente: generative Patterns und Live-Coding-Musik.',
-			en: 'TidalCycles experiments: generative patterns and live-coded music.',
+			de: 'TidalCycles-Sketches: generative Patterns und Live-Coding.',
+			en: 'TidalCycles sketches: generative patterns and live coding.',
 		},
-		tags: ['TidalCycles', 'Live Coding', 'Music'],
+		tags: ['TidalCycles', 'Live Coding'],
 	},
 	'ssh-toolchain': {
 		title: 'ssh-toolchain',
 		order: 6,
 		description: {
-			de: 'Persönliche SSH-Toolchain: Keys, Hosts und Deploy-Skripte sauber verwaltet.',
-			en: 'Personal SSH toolchain: keys, hosts and deploy scripts kept tidy.',
+			de: 'Meine SSH-Helfer: Keys, Hosts und Deploy-Skripte an einem Ort.',
+			en: 'My SSH helpers: keys, hosts and deploy scripts in one place.',
 		},
 		tags: ['Shell', 'SSH', 'DevOps'],
 	},

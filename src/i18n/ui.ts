@@ -8,11 +8,11 @@ export const defaultLang: Lang = 'de';
 
 export const ui = {
 	de: {
-		'meta.title': 'Proto — Entwickler & Builder',
+		'meta.title': 'Proto — Software für Livestreams & Automatisierung',
 		'meta.description':
-			'Portfolio von Proto: Werkzeuge für Livestreams, Daten und Automatisierung. Python, Docker, Self-Hosting und Open Source.',
+			'Portfolio von Proto: TokTracker, Restreamer und Automatisierung für Livestreams. Gebaut mit Python, Docker und Linux.',
 
-		'brand.subtitle': 'DEVELOPER · BUILDER',
+		'brand.subtitle': 'PYTHON · DOCKER · LINUX',
 		'nav.label': 'Hauptnavigation',
 		'nav.projects': 'Projekte',
 		'nav.about': 'Über',
@@ -21,63 +21,60 @@ export const ui = {
 		'skip': 'Zum Inhalt springen',
 
 		'hero.eyebrow': '// PORTFOLIO',
-		'hero.title': 'Ich baue Werkzeuge, die einfach laufen.',
+		'hero.title': 'Software für Livestreams, Daten und Automatisierung.',
 		'hero.lead':
-			'Entwickler aus Deutschland. Ich baue praktische Software für Livestreams, Daten und Automatisierung — von Echtzeit-Analytics bis zu Docker-Setups, die man einmal aufsetzt und vergisst.',
+			'Ich bin Proto, Entwickler aus Deutschland. Ich baue Tools, die ich selbst brauche: Echtzeit-Tracking, Stream-Recording und Automatisierung. Meistens mit Python, Docker und Linux.',
 		'hero.cta.projects': 'Projekte ansehen',
 		'hero.cta.github': 'GitHub',
 		'hero.pill.location': 'Deutschland',
-		'hero.pill.open': 'Open Source',
+		'hero.pill.hosting': 'Self-hosted',
 		'hero.pill.stack': 'Python · Docker',
 
 		'profile.label': 'Profil',
-		'profile.role': 'Developer / Builder',
+		'profile.role': 'Software & Infrastruktur',
 		'profile.handle': 'HANDLE',
 		'profile.base': 'BASIS',
 		'profile.focus': 'FOKUS',
-		'profile.focus.value': 'Realtime · Automation',
+		'profile.focus.value': 'Livestream-Tools',
 		'profile.status': 'STATUS',
-		'profile.status.value': 'Open Source',
+		'profile.status.value': 'Public Repos',
 
 		'projects.eyebrow': '01 / PROJEKTE',
-		'projects.title': 'Ausgewählte Projekte',
+		'projects.title': 'Was ich baue',
 		'projects.hint':
-			'Automatisch synchronisiert mit meinen öffentlichen GitHub-Repositories.',
+			'Die drei Hauptprojekte zuerst, darunter kleinere Tools und Experimente.',
+		'projects.main': 'Hauptprojekte',
+		'projects.other': 'Weitere Projekte',
 		'projects.updated': 'Aktualisiert',
 		'projects.stars': 'Sterne',
 		'projects.open': 'Repo ansehen',
 		'projects.empty': 'Keine öffentlichen Projekte gefunden.',
 		'projects.all': 'Alle Repositories',
-		'projects.moreHint':
-			'Alle öffentlichen Repositories, Commits und Experimente.',
-		'projects.github': 'GitHub öffnen',
-		'projects.noDescription':
-			'Kein Beschreibungstext im Repository hinterlegt.',
+		'projects.noDescription': 'Keine Beschreibung im Repository hinterlegt.',
 
 		'about.eyebrow': '02 / ÜBER',
-		'about.title': 'Kurz und praktisch.',
+		'about.title': 'Wie ich arbeite.',
 		'about.p1':
-			'Am liebsten arbeite ich an Systemen, die im Hintergrund laufen: Datenpipelines, kleine Dienste, Automatisierung und alles, was sich selbst hosten lässt.',
+			'Ich baue am liebsten Systeme, die im Hintergrund laufen: Daten sammeln, verarbeiten und verfügbar machen. Wenn mir ein Tool fehlt, baue ich es selbst — und meistens bleibt es dann im Einsatz.',
 		'about.p2':
-			'Mein Werkzeugkasten ist bewusst schmal: Python für Logik und Daten, Docker für reproduzierbare Deployments, Linux als Fundament. Im Frontend setze ich auf schlanke, statische Lösungen — wie diese Seite mit Astro.',
+			'Mein Stack ist bewusst klein: Python für Logik und Daten, Docker für reproduzierbare Deployments, Linux als Basis. Im Frontend reicht mir eine statische Seite ohne unnötigen Ballast.',
 		'about.stack': 'STACK',
 
 		'contact.eyebrow': '03 / KONTAKT',
-		'contact.title': 'Lass uns reden.',
+		'contact.title': 'Fragen oder Ideen?',
 		'contact.text':
-			'Fragen, Ideen oder ein Projekt? Der schnellste Weg zu mir führt über GitHub.',
+			'Wenn du Fragen zu einem Projekt hast oder etwas Ähnliches brauchst, schreib mir auf GitHub. Dort liegen auch alle Repositories.',
 		'contact.cta': 'Auf GitHub schreiben',
 
-		'footer.built': 'Gebaut mit',
-		'footer.static': 'Statisch · ohne Tracking',
+		'footer.links': 'Footer-Links',
 		'footer.top': 'Nach oben',
 	},
 	en: {
-		'meta.title': 'Proto — Developer & Builder',
+		'meta.title': 'Proto — Software for livestreams & automation',
 		'meta.description':
-			'Portfolio of Proto: tools for livestreams, data and automation. Python, Docker, self-hosting and open source.',
+			'Portfolio of Proto: TokTracker, Restreamer and automation for livestreams. Built with Python, Docker and Linux.',
 
-		'brand.subtitle': 'DEVELOPER · BUILDER',
+		'brand.subtitle': 'PYTHON · DOCKER · LINUX',
 		'nav.label': 'Main navigation',
 		'nav.projects': 'Projects',
 		'nav.about': 'About',
@@ -86,52 +83,52 @@ export const ui = {
 		'skip': 'Skip to content',
 
 		'hero.eyebrow': '// PORTFOLIO',
-		'hero.title': 'I build tools that just work.',
+		'hero.title': 'Software for livestreams, data and automation.',
 		'hero.lead':
-			'Developer based in Germany. I build practical software for livestreams, data and automation — from real-time analytics to Docker setups you configure once and forget.',
+			"I'm Proto, a developer based in Germany. I build tools I need myself: real-time tracking, stream recording and automation. Mostly with Python, Docker and Linux.",
 		'hero.cta.projects': 'See projects',
 		'hero.cta.github': 'GitHub',
 		'hero.pill.location': 'Germany',
-		'hero.pill.open': 'Open Source',
+		'hero.pill.hosting': 'Self-hosted',
 		'hero.pill.stack': 'Python · Docker',
 
 		'profile.label': 'Profile',
-		'profile.role': 'Developer / Builder',
+		'profile.role': 'Software & infrastructure',
 		'profile.handle': 'HANDLE',
 		'profile.base': 'BASE',
 		'profile.focus': 'FOCUS',
-		'profile.focus.value': 'Realtime · Automation',
+		'profile.focus.value': 'Livestream tools',
 		'profile.status': 'STATUS',
-		'profile.status.value': 'Open Source',
+		'profile.status.value': 'Public repos',
 
 		'projects.eyebrow': '01 / PROJECTS',
-		'projects.title': 'Selected projects',
-		'projects.hint': 'Synced automatically from my public GitHub repositories.',
+		'projects.title': 'What I build',
+		'projects.hint':
+			'The three main projects first, followed by smaller tools and experiments.',
+		'projects.main': 'Main projects',
+		'projects.other': 'More projects',
 		'projects.updated': 'Updated',
 		'projects.stars': 'Stars',
 		'projects.open': 'View repo',
 		'projects.empty': 'No public projects found.',
 		'projects.all': 'All repositories',
-		'projects.moreHint': 'All public repositories, commits and experiments.',
-		'projects.github': 'Open GitHub',
 		'projects.noDescription': 'No description provided in the repository.',
 
 		'about.eyebrow': '02 / ABOUT',
-		'about.title': 'Short and practical.',
+		'about.title': 'How I work.',
 		'about.p1':
-			'I like working on systems that run in the background: data pipelines, small services, automation and anything that can be self-hosted.',
+			'I like building systems that run in the background: collecting, processing and exposing data. When a tool is missing, I build it myself — and most of the time it stays in use.',
 		'about.p2':
-			'My toolbox is deliberately small: Python for logic and data, Docker for reproducible deployments, Linux as the foundation. On the frontend I prefer lean, static solutions — like this site built with Astro.',
+			'My stack is deliberately small: Python for logic and data, Docker for reproducible deployments, Linux as the base. On the frontend, a static site without extra weight is enough.',
 		'about.stack': 'STACK',
 
 		'contact.eyebrow': '03 / CONTACT',
-		'contact.title': "Let's talk.",
+		'contact.title': 'Questions or ideas?',
 		'contact.text':
-			'Questions, ideas or a project? The fastest way to reach me is GitHub.',
+			'If you have questions about a project or need something similar, message me on GitHub. All repositories are there too.',
 		'contact.cta': 'Message me on GitHub',
 
-		'footer.built': 'Built with',
-		'footer.static': 'Static · no tracking',
+		'footer.links': 'Footer links',
 		'footer.top': 'Back to top',
 	},
 } as const;

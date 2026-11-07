@@ -1,37 +1,22 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { formatDate, useTranslations } from '../i18n/utils';
+import { languageColor } from '../lib/languages';
 import type { Project } from '../lib/projects';
 
 interface Props {
 	project: Project;
 	index: number;
 	lang: Lang;
+	variant?: 'flagship' | 'feature';
 }
 
-const { project, index, lang } = Astro.props;
+const { project, index, lang, variant = 'feature' } = Astro.props;
 const t = useTranslations(lang);
-
-const languageColors: Record<string, string> = {
-	Python: '#3572a5',
-	TypeScript: '#3178c6',
-	JavaScript: '#f1e05a',
-	Astro: '#ff5a03',
-	Shell: '#89e051',
-	HTML: '#e34c26',
-	CSS: '#563d7c',
-	Dockerfile: '#384d54',
-};
-
-const dotColor = project.language
-	? (languageColors[project.language] ?? 'var(--muted)')
-	: 'var(--muted)';
+const dotColor = languageColor(project.language);
 ---
 
-<a
-	class:list={['project-card', { featured: project.featured }]}
-	href={project.url}
->
+<a class:list={['project-card', variant]} href={project.url}>
 	<div class="card-top">
 		<span class="card-index">{String(index).padStart(2, '0')}</span>
 		{

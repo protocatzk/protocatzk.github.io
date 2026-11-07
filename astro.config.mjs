@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-const site = process.env.SITE_URL || 'https://protocatzk.github.io';
+const site = process.env.SITE_URL || 'https://proto.heliac.dev';
 const base = process.env.BASE_PATH || '/';
 
 // https://astro.build/config

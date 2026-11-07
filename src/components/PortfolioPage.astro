@@ -1,6 +1,7 @@
 ---
 import Footer from './Footer.astro';
 import Header from './Header.astro';
+import MiniProject from './MiniProject.astro';
 import ProjectCard from './ProjectCard.astro';
 import { site, stack } from '../data/site';
 import type { Lang } from '../i18n/ui';
@@ -19,6 +20,9 @@ const projects = (await getProjects(lang)).map((project) => ({
 	...project,
 	description: project.description || t('projects.noDescription'),
 }));
+
+const mainProjects = projects.filter((project) => project.featured);
+const otherProjects = projects.filter((project) => !project.featured);
 ---
 
 <Layout lang={lang} title={t('meta.title')} description={t('meta.description')}>
@@ -44,7 +48,7 @@ const projects = (await getProjects(lang)).map((project) => ({
 
 				<ul class="pills">
 					<li>{t('hero.pill.location')}</li>
-					<li>{t('hero.pill.open')}</li>
+					<li>{t('hero.pill.hosting')}</li>
 					<li>{t('hero.pill.stack')}</li>
 				</ul>
 			</div>
@@ -101,23 +105,47 @@ const projects = (await getProjects(lang)).map((project) => ({
 
 			{
 				projects.length > 0 ? (
-					<div class="project-grid">
-						{projects.map((project, index) => (
-							<ProjectCard project={project} index={index + 1} lang={lang} />
-						))}
+					<>
+						{mainProjects.length > 0 && (
+							<div class="project-group">
+								<div class="group-head">
+									<p class="group-label">{t('projects.main')}</p>
+								</div>
+								<div class="project-grid">
+									{mainProjects.map((project, index) => (
+										<ProjectCard
+											project={project}
+											index={index + 1}
+											lang={lang}
+											variant={index === 0 ? 'flagship' : 'feature'}
+										/>
+									))}
+								</div>
+							</div>
+						)}
 
-						<a class="project-card more" href={site.repos}>
-							<div class="card-top">
-								<span class="card-index">→</span>
-								<span class="card-lang">GitHub</span>
+						{otherProjects.length > 0 && (
+							<div class="project-group">
+								<div class="group-head">
+									<p class="group-label">{t('projects.other')}</p>
+									<a class="group-link" href={site.repos}>
+										{t('projects.all')} <span aria-hidden="true">↗</span>
+									</a>
+								</div>
+								<ul class="mini-list">
+									{otherProjects.map((project, index) => (
+										<li>
+											<MiniProject
+												project={project}
+												index={mainProjects.length + index + 1}
+												lang={lang}
+											/>
+										</li>
+									))}
+								</ul>
 							</div>
-							<h3 class="card-title">{t('projects.all')}</h3>
-							<p class="card-desc">{t('projects.moreHint')}</p>
-							<div class="card-foot">
-								<span class="open">{t('projects.github')} ↗</span>
-							</div>
-						</a>
-					</div>
+						)}
+					</>
 				) : (
 					<p class="section-hint">{t('projects.empty')}</p>
 				)

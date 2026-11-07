@@ -1,8 +1,11 @@
-# protocatzk.github.com
+# proto.heliac.dev
 
 Statisches, zweisprachiges Portfolio für **Proto** — gebaut mit Astro, inspiriert vom dunklen, monochromen Interface von TokTracker.
 
+**Live:** https://proto.heliac.dev/
+
 - **Deutsch** unter `/`, **Englisch** unter `/en/`
+- Drei Hauptprojekte groß, weitere Repositories kompakt darunter
 - Projekte werden beim Build automatisch aus der öffentlichen GitHub-API geladen
 - Kein JavaScript, keine externen Fonts, kein Tracking
 - Budget: **unter 1 MB** — der Build schlägt fehl, wenn es größer wird
@@ -34,11 +37,11 @@ yarn size   # prüft einen vorhandenen dist/-Ordner
 | :--- | :--- |
 | `src/i18n/ui.ts` | Alle Texte auf Deutsch und Englisch |
 | `src/data/site.ts` | Name, Handle, Links, Avatar, Stack |
-| `src/data/projects.ts` | Schöne Titel, Beschreibungen und Tags pro Repository |
+| `src/data/projects.ts` | Titel, Beschreibungen, Tags und `featured`-Flag pro Repository |
 | `src/data/repos.fallback.json` | Lokaler Snapshot, falls die GitHub-API beim Build nicht erreichbar ist |
 | `src/styles/global.css` | Farben, Typografie und Layout |
 
-Neue öffentliche Repositories erscheinen automatisch. Sie können in `projectOverrides` ergänzt werden, müssen aber nicht. Forks sowie Profil- und Portfolio-Repositories werden ausgeblendet.
+Die drei Hauptprojekte werden über `featured: true` in `projectOverrides` gesteuert. Alle anderen öffentlichen Repositories erscheinen automatisch in der kompakten Liste darunter. Forks sowie Profil- und Portfolio-Repositories werden ausgeblendet.
 
 ### GitHub-API
 
@@ -57,17 +60,26 @@ Der Workflow `.github/workflows/deploy.yml` baut die Seite bei jedem Push auf `s
 1. Im Repository unter **Settings → Pages** als Source **GitHub Actions** wählen.
 2. Push auf `stream`.
 
-`SITE_URL` und `BASE_PATH` werden vom Workflow aus `actions/configure-pages` gesetzt. Dadurch funktioniert die Seite sowohl als User-Page als auch als Project-Page unter einem Unterpfad. Bei einer eigenen Domain liefert `configure-pages` automatisch die passende URL.
+`SITE_URL` ist im Workflow fest auf `https://proto.heliac.dev` gesetzt. `BASE_PATH` kommt weiterhin von `actions/configure-pages`.
+
+### Custom Domain
+
+Die Seite läuft unter `proto.heliac.dev`. Dafür sind zwei Dinge nötig:
+
+1. DNS-CNAME: `proto` → `protocatzk.github.io`
+2. In **Settings → Pages**: Custom Domain `proto.heliac.dev` und **Enforce HTTPS** aktivieren
+
+Die Datei `public/CNAME` enthält die Domain, damit sie im Build-Artefakt erhalten bleibt.
 
 ## Struktur
 
 ```text
 src/
-├── components/        Header, Footer, ProjectCard, PortfolioPage
+├── components/        Header, Footer, ProjectCard, MiniProject, PortfolioPage
 ├── data/              Site-Konfiguration, Projekt-Copy, Repo-Snapshot
 ├── i18n/              DE/EN-Texte und Routing-Helfer
 ├── layouts/           HTML-Grundgerüst inkl. Meta/SEO
-├── lib/               GitHub-API und Projekt-Aufbereitung
+├── lib/               GitHub-API, Projekt-Aufbereitung, Sprachfarben
 ├── pages/             /, /en/ und 404
 └── styles/            globales CSS
 ```

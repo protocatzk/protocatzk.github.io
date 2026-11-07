@@ -1,0 +1,38 @@
+---
+import type { Lang } from '../i18n/ui';
+import { formatDate } from '../i18n/utils';
+import { languageColor } from '../lib/languages';
+import type { Project } from '../lib/projects';
+
+interface Props {
+	project: Project;
+	index: number;
+	lang: Lang;
+}
+
+const { project, index, lang } = Astro.props;
+const dotColor = languageColor(project.language);
+---
+
+<a class="mini-project" href={project.url}>
+	<span class="mini-index">{String(index).padStart(2, '0')}</span>
+
+	<span class="mini-body">
+		<span class="mini-title">{project.title}</span>
+		<span class="mini-desc">{project.description}</span>
+	</span>
+
+	<span class="mini-lang">
+		{
+			project.language && (
+				<>
+					<span class="lang-dot" style={`--dot: ${dotColor}`} aria-hidden="true" />
+					{project.language}
+				</>
+			)
+		}
+	</span>
+
+	<span class="mini-updated">{formatDate(project.updatedAt, lang)}</span>
+	<span class="mini-arrow" aria-hidden="true">↗</span>
+</a>
